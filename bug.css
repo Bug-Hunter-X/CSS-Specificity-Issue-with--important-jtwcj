@@ -1,0 +1,23 @@
+The following CSS code snippet demonstrates an issue where the expected behavior doesn't occur due to specificity and inheritance:
+
+```css
+div {
+  font-size: 16px;
+}
+
+p {
+  font-size: 18px;
+}
+
+.special-paragraph {
+  font-size: 14px !important;
+}
+
+<div>
+  <p class="special-paragraph">This text should be 14px.</p>
+</div>
+```
+
+The `!important` declaration is intended to override the inherited font size, but the browser might still render the text at 18px due to the specificity of the `p` selector outweighing the specificity of the `!important` declaration in some browsers.
+
+The unexpected behavior occurs because `!important` only increases the weight of the rule, not its specificity. If the specificity of a selector with a non-!important declaration is higher than the selector with an !important declaration, the non-!important declaration will take precedence.
